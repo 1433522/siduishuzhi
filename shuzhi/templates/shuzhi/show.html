@@ -1,0 +1,57 @@
+{% extends "shuzhi/base.html" %}
+
+{% block down %}
+<div class="now">
+    <div class="left">
+        <div class="name"><strong>述职者：</strong>{{ shuzhizhe.name }}</div>
+        <div class="intro"><strong>个人简介：</strong>{{ shuzhizhe.intro }}</div>
+    </div>
+    <div class="right"><img src="{{ shuzhizhe.photo.url }}" alt=""></div>
+    <div class="clear"></div>
+</div>
+{% if nextone %} 
+<div class="operate">
+    <input type="button" id="btn5min" value="{{ shuzhizhe.name }}开始述职" />
+    <input type="button" id="btn4min" value="{{ shuzhizhe.name }}开始回答" />
+    <a href="{% url "shuzhi:index" %}show-{{ nextone.id }}"">{{ shuzhizhe.name }}述职结束,{{ nextone.name }}开始述职</a>
+    <div class="clear"></div>
+</div>
+<div class="nextone">
+    <div class="left">
+        <div class="name"><strong>下一位：</strong>{{ nextone.name }}</div>
+        <div class="intro"><strong>个人简介：</strong>{{ nextone.intro }}</div>
+    </div>
+    <div class="right"><img src="{{ nextone.photo.url }}" alt=""></div>
+    <div class="clear"></div>
+{% endif %}
+{% if not nextone %} 
+<div class="operate">
+    <input type="button" id="btn5min" value="{{ shuzhizhe.name }}开始述职" />
+    <input type="button" id="btn4min" value="{{ shuzhizhe.name }}开始回答" />
+    <a href="{% url "shuzhi:index" %}">{{ shuzhizhe.name }}述职结束</a>
+    <div class="clear"></div>
+</div>
+{% endif %}
+<script type="text/javascript">
+function time(o,wait,value,value2) {
+ var wait=wait;
+ if (wait == 0) {
+  o.removeAttribute("disabled");
+  o.value=value;
+  wait = 60;
+ } else {
+  o.setAttribute('disabled','True');
+  o.value=value2+wait + "s";
+  wait--;
+  setTimeout(function() {
+  time(o,wait,value,value2)
+  },
+  1000)
+ }
+ }
+document.getElementById("btn5min").onclick=function(){time(this,300,"述职时间结束","正在述职");}
+document.getElementById("btn4min").onclick=function(){time(this,240,"回答时间结束","正在回答");}
+
+</script>
+
+{% endblock %}
