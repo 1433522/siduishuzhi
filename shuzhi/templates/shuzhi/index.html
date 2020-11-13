@@ -3,8 +3,8 @@
 
 {% block down %}
 
-{% comment %}第一次组织述职 开始{% endcomment %}
-{% if status0.count and status2.count == 0 %}
+{% comment %}第一次组织述职 刚开始{% endcomment %}
+{% if status0.count and status1.count and status2.count == 0 %}
 <div class="status0">
     <h3 class="statistic">今天共有{% total0 %}名同志参加述职</h3>
     <ul>
@@ -16,7 +16,8 @@
     </ul>
     <div class="clear"></div>
 </div>
-{% elif status0.count == 0 and status2.count and status1.count %}
+{% comment %}第一次述职结束{% endcomment %}
+{% elif status0.count == 0 and status1.count and status2.count %}
 <div class="status1">
     <h3 class="statistic">还有{% total1 %}名同志待下次述职</h3>
     <ul>
@@ -28,9 +29,43 @@
     </ul>
     <div class="clear"></div>
 </div>
-{% elif status0.count == 0 and status1.count == 0 %}
+<div class="status2">
+    <h3 class="statistic">已有{% total2 %}名同志完成述职</h3>
+    <ul>
+        {% for i in status2 %}
+            <li class="brick-item">
+                <a href="{% url "shuzhi:index" %}show-{{ i.id }}"><img src="{{ i.photo.url }}" alt=""><p class="name">{{ i.name }}</p></a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% comment %}再次述职开始{% endcomment %}
+{% elif status0.count and status2.count %}
+<div class="status0">
+    <h3 class="statistic">今天共有{% total0 %}名同志参加述职</h3>
+    <ul>
+        {% for i in status0 %}
+            <li class="brick-item">
+                <a href="{% url "shuzhi:index" %}show-{{ i.id }}"><img src="{{ i.photo.url }}" alt=""><p class="name">{{ i.name }}</p></a>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="clear"></div>
+</div>
+<div class="status2">
+    <h3 class="statistic">已有{% total2 %}名同志完成述职</h3>
+    <ul>
+        {% for i in status2 %}
+            <li class="brick-item">
+                <a href="{% url "shuzhi:index" %}show-{{ i.id }}"><img src="{{ i.photo.url }}" alt=""><p class="name">{{ i.name }}</p></a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% comment %}全部述职结束{% endcomment %}
+{% elif status0.count == 0 and status1.count == 0 and status2.count %}
 <div class="alldone">
-    <h3 class="statistic">共有{% total2 %}名同志完成述职</h3>
+    <h3 class="statistic">所有{% total2 %}名同志完成述职</h3>
     <ul>
         {% for i in status2 %}
             <li class="brick-item">
@@ -41,34 +76,11 @@
 </div>
 {% endif %}
 
-{% if status0.count and status2.count %}
-<div class="status2">
-    <h3 class="statistic">已有{% total2 %}名同志完成述职</h3>
-    <ul>
-        {% for i in status2 %}
-            <li class="brick-item">
-                <a href="{% url "shuzhi:index" %}show-{{ i.id }}"><img src="{{ i.photo.url }}" alt=""><p class="name">{{ i.name }}</p></a>
-            </li>
-        {% endfor %}
-    </ul>
-</div>
-{% elif status1.count and status2.count %}
-<div class="status2">
-    <h3 class="statistic">已有{% total2 %}名同志完成述职</h3>
-    <ul>
-        {% for i in status2 %}
-            <li class="brick-item">
-                <a href="{% url "shuzhi:index" %}show-{{ i.id }}"><img src="{{ i.photo.url }}" alt=""><p class="name">{{ i.name }}</p></a>
-            </li>
-        {% endfor %}
-    </ul>
-</div>
-{% endif %}
 <script language="JavaScript">
 function myrefresh()
 {
        window.location.reload();
 }
-setTimeout('myrefresh()',1000); //指定10秒刷新一次
+setTimeout('myrefresh()',1000); //指定1秒刷新一次
 </script>
 {% endblock %}
