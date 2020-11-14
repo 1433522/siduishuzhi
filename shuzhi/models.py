@@ -15,7 +15,7 @@ class Addr(models.Model):
 class Shuzhizhe(models.Model):
     STATUS_CHOICES = (
             (0,'未述职，前来述职'),
-            (1,'未述职，以后述职'),
+            (1,'未述职，下次述职'),
             (2,'述职完毕'),
             )
     name = models.CharField("姓名",max_length=50)

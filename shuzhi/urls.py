@@ -4,6 +4,5 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),#所有未述职人员
     path('show-<int:sid>', views.show, name='show'),#述职者个人
-    path('done-<int:did>', views.done, name='done'),#述职结束
 ]
 
