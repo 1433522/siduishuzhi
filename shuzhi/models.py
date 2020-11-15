@@ -18,11 +18,11 @@ class Shuzhizhe(models.Model):
             (1,'未述职，下次述职'),
             (2,'述职完毕'),
             )
-    name = models.CharField("姓名",max_length=50)
+    name = models.CharField("姓名",unique=True,max_length=50)
     intro = models.TextField("个人简介",max_length=200)
     addr = models.ForeignKey(Addr, on_delete=models.DO_NOTHING,blank=True, null=True,verbose_name="所属营区")
     photo = models.ImageField("证件照",upload_to='photo/',blank=True,null=True)
-    status = models.IntegerField("状态",choices=STATUS_CHOICES,default=0,blank=True,null=True)
+    status = models.IntegerField("状态",choices=STATUS_CHOICES,default=1,blank=True,null=True)
 
     class Meta:
         ordering = ('addr',)
