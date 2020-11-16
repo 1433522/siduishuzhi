@@ -7,6 +7,7 @@ def index(request):
     status0 = Shuzhizhe.objects.filter(status=0).order_by('?',)[:5]
     status1 = Shuzhizhe.objects.filter(status=1).order_by('?')[:5]
     status2 = Shuzhizhe.objects.filter(status=2).order_by('?')[:5]
+    print(status0)
 
     # 所有人员按照营区排序
     status0fixed = Shuzhizhe.objects.filter(status=0).order_by("addr")
