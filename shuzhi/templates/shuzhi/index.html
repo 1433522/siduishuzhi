@@ -2,18 +2,19 @@
 {% load shuzhi_tags %}
 
 {% block down %}
+<div class="down1">
 {% comment %}第一次组织述职 刚开始{% endcomment %}
 {% if status0.count and status1.count and status2.count == 0 %}
 <div class="col20 container curved">
-    <div class="zongti">
-        <h3>总体情况</h3>
-        <p><strong>本次参加({% total0 %})：</strong>{% for i in status0fixed %}{{ i.name }}{% if not forloop.last %}、{% endif %}{% endfor %}</p>
-        <p><strong>下次参加({% total1 %})：</strong>{% for i in status1fixed %}{{ i.name }}{% if not forloop.last %}、{% endif %}{% endfor %}</p>
+    <div class="rule">
+        <h3>述职规则</h3>
+        <p><strong>述职顺序：</strong>从今天所有参加述职的同志中，利用计算机程序随机挑选第一位述职者，同时确定下一位述职者，但无法确定下下一位。</p>
+        <p><strong>述职流程：</strong>每名同志先脱稿自述个人工作情况，时间不超过5分钟；之后，回答1个队干部提问的问题，时间不超过4分钟。同时，下一位要述职的同志起座做好准备。</p>
     </div>
 </div>
 <div class="col60">
     <div class="status0">
-        <h3 class="statistic">今天共有{% total0 %}名同志参加述职</h3>
+        <h3 class="statistic">参加述职同志({{ status0.count }})</h3>
         <ul>
             {% for i in status0 %}
                 <li class="brick-item">
@@ -23,21 +24,20 @@
         </ul>
         <div class="clear"></div>
     </div>
-</div>
-<div class="col20 container curved">
-    <div class="rule">
-        <h3>述职规则</h3>
-        <p><strong>述职顺序：</strong>从今天所有参加述职的同志中，利用计算机程序随机挑选第一位述职者，同时确定下一位述职者，但无法确定下下一位。</p>
-        <p><strong>述职流程：</strong>每名同志先脱稿自述个人工作情况，时间不超过5分钟；之后，回答1个队干部提问的问题，时间不超过4分钟。同时，下一位要述职的同志起座做好准备。</p>
-    </div>
+{% comment %}<script language="JavaScript">{% endcomment %}
+{% comment %}function myrefresh(){% endcomment %}
+{% comment %}{{% endcomment %}
+       {% comment %}window.location.reload();{% endcomment %}
+{% comment %}}{% endcomment %}
+{% comment %}setTimeout('myrefresh()',1000); //指定1秒刷新一次{% endcomment %}
+{% comment %}</script>{% endcomment %}
 </div>
 {% comment %}第一次述职结束{% endcomment %}
 {% elif status0.count == 0 and status1.count and status2.count %}
 <div class="col20 container curved">
     <div class="zongti">
-        <h3>总体情况</h3>
+        <h3>本次述职结束</h3>
         <p><strong>下次参加({% total1 %})：</strong>{% for i in status1fixed %}{{ i.name }}{% if not forloop.last %}、{% endif %}{% endfor %}</p>
-        <p><strong>述职完毕({% total2 %})：</strong>{% for i in status2fixed %}{{ i.name }}{% if not forloop.last %}、{% endif %}{% endfor %}</p>
     </div>
 </div>
 <div class="col60">
@@ -52,17 +52,9 @@
         </ul>
         <div class="clear"></div>
     </div>
-    <div class="status2">
-        <h3 class="statistic">已有{% total2 %}名同志完成述职</h3>
-        <ul>
-            {% for i in status2 %}
-                <li class="brick-item">
-                    <a href="{% url "shuzhi:index" %}show-{{ i.id }}"><img src="{{ i.photo.url }}" alt=""><p class="name">{{ i.name }}</p></a>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
 </div>
+{% comment %}再次述职开始{% endcomment %}
+{% elif status0.count and status2.count %}
 <div class="col20 container curved">
     <div class="rule">
         <h3>述职规则</h3>
@@ -70,21 +62,9 @@
         <p><strong>述职流程：</strong>每名同志先脱稿自述个人工作情况，时间不超过5分钟；之后，回答1个队干部提问的问题，时间不超过4分钟。同时，下一位要述职的同志起座做好准备。</p>
     </div>
 </div>
-{% comment %}再次述职开始{% endcomment %}
-{% elif status0.count and status2.count %}
-<div class="col20 container curved">
-    <div class="zongti">
-        <h3>总体情况</h3>
-        <p><strong>本次参加({% total0 %})：</strong>{% for i in status0fixed %}{{ i.name }}{% if not forloop.last %}、{% endif %}{% endfor %}</p>
-        {% if status1.count %}
-        <p><strong>下次参加({% total1 %})：</strong>{% for i in status1fixed %}{{ i.name }}{% if not forloop.last %}、{% endif %}{% endfor %}</p>
-        {% endif %}
-        <p><strong>述职完毕({% total2 %})：</strong>{% for i in status2fixed %}{{ i.name }}{% if not forloop.last %}、{% endif %}{% endfor %}</p>
-    </div>
-</div>
 <div class="col60">
     <div class="status0">
-        <h3 class="statistic">今天共有{% total0 %}名同志参加述职</h3>
+        <h3 class="statistic">参加述职同志({{ status0.count }})</h3>
         <ul>
             {% for i in status0 %}
                 <li class="brick-item">
@@ -95,33 +75,10 @@
         <div class="clear"></div>
     </div>
     <div class="clear"></div>
-    <div class="status2">
-        <h3 class="statistic">已有{% total2 %}名同志完成述职</h3>
-        <ul>
-            {% for i in status2 %}
-                <li class="brick-item">
-                    <a href="{% url "shuzhi:index" %}show-{{ i.id }}"><img src="{{ i.photo.url }}" alt=""><p class="name">{{ i.name }}</p></a>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-</div>
-<div class="col20 container curved">
-    <div class="rule">
-        <h3>述职规则</h3>
-        <p><strong>述职顺序：</strong>从今天所有参加述职的同志中，利用计算机程序随机挑选第一位述职者，同时确定下一位述职者，但无法确定下下一位。</p>
-        <p><strong>述职流程：</strong>每名同志先脱稿自述个人工作情况，时间不超过5分钟；之后，回答1个队干部提问的问题，时间不超过4分钟。同时，下一位要述职的同志起座做好准备。</p>
-    </div>
 </div>
 {% comment %}全部述职结束{% endcomment %}
 {% elif status0.count == 0 and status1.count == 0 and status2.count %}
-<div class="col20 container curved">
-    <div class="zongti">
-        <h3>总体情况</h3>
-        <p>本次述职活动圆满结束！希望所有同志以此为契机，只争朝夕、努力学习、认真工作，在队党委的领导下，为把我队建成一流服务保障机构而奋斗，为实现强军目标而奋斗！</p>
-    </div>
-</div>
-<div class="col60">
+<div class="over">
     <h3 class="statistic">所有{% total2 %}名同志完成述职</h3>
     <ul>
         {% for i in status2fixed %}
@@ -130,16 +87,8 @@
             </li>
         {% endfor %}
     </ul>
-</div>
-<div class="col20 container curved">
-    <div class="rule">
-        <h3>述职规则</h3>
-        <p><strong>述职顺序：</strong>从今天所有参加述职的同志中，利用计算机程序随机挑选第一位述职者，同时确定下一位述职者，但无法确定下下一位。</p>
-        <p><strong>述职流程：</strong>每名同志先脱稿自述个人工作情况，时间不超过5分钟；之后，回答1个队干部提问的问题，时间不超过4分钟。同时，下一位要述职的同志起座做好准备。</p>
-    </div>
-</div>
 {% endif %}
-
+</div>
 {% comment %}<script language="JavaScript">{% endcomment %}
 {% comment %}function myrefresh(){% endcomment %}
 {% comment %}{{% endcomment %}
@@ -148,3 +97,4 @@
 {% comment %}setTimeout('myrefresh()',1000); //指定1秒刷新一次{% endcomment %}
 {% comment %}</script>{% endcomment %}
 {% endblock %}
+</div>

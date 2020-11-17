@@ -4,9 +4,9 @@ from .models import Addr,Shuzhizhe
 
 def index(request):
     # 未述职者随机进行述职: 如果你想进行随机排序,可以直接传入'?'即可。
-    status0 = Shuzhizhe.objects.filter(status=0).order_by('?',)[:5]
-    status1 = Shuzhizhe.objects.filter(status=1).order_by('?')[:5]
-    status2 = Shuzhizhe.objects.filter(status=2).order_by('?')[:5]
+    status0 = Shuzhizhe.objects.filter(status=0).order_by('?')
+    status1 = Shuzhizhe.objects.filter(status=1).order_by('?')
+    status2 = Shuzhizhe.objects.filter(status=2).order_by('?')
     print(status0)
 
     # 所有人员按照营区排序

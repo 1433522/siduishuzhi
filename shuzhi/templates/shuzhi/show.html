@@ -1,6 +1,7 @@
 {% extends "shuzhi/base.html" %}
 
 {% block down %}
+<div class="down">
 <div class="now">
     <div class="left">
         <div class="name"><strong>述职者：</strong>{{ shuzhizhe.name }}</div>
@@ -53,5 +54,5 @@ document.getElementById("btn5min").onclick=function(){time(this,300,"述职时�
 document.getElementById("btn4min").onclick=function(){time(this,240,"回答时间结束","正在回答");}
 
 </script>
-
+</div>
 {% endblock %}
