@@ -137,13 +137,13 @@ a {
 }
 .down1 li {
     float:left;
-    width:92px;
+    width:84px;
     padding:0 10px 0 0;
     margin-bottom:10px;
 }
 .down1 img {
     width:100%;
-    height:134px;
+    height:122px;
 }
 .down1 li {
     transition: all 0.3s;

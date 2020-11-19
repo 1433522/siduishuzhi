@@ -23,8 +23,8 @@ def show(request,sid):
     shuzhizhe.status = 2
     shuzhizhe.save()
     nextone = None
-    if Shuzhizhe.objects.filter(status=0):
-        nextone = Shuzhizhe.objects.filter(status=0)[0]
+    if Shuzhizhe.objects.filter(status=0).order_by('?'):
+        nextone = Shuzhizhe.objects.filter(status=0).order_by('?')[0]
     return render(request,
             'shuzhi/show.html',
             locals())
